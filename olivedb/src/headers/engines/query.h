@@ -4,23 +4,27 @@
 
 namespace olive
 {
-  class CosineSimilarityEngine : public QueryEngine
+  class CosineSimilarityEngine : public Query
   {
   };
 
-  class JaccardSimilarityEngine : public QueryEngine
+  class JaccardSimilarityEngine : public Query
   {
   };
 
-  class EuclideanSimilarityEngine : public QueryEngine
+  class EuclideanSimilarityEngine : public Query
   {
   };
 
-  class ManhattanSimilarityEngine : public QueryEngine
+  class ManhattanSimilarityEngine : public Query
   {
   };
 
-  class PearsonSimilarityEngine : public QueryEngine
+  class HammingSimilarityEngine : public Query
+  {
+  };
+
+  class DotProductSimilarityEngine : public Query
   {
   };
 
