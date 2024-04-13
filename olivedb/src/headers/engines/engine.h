@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <memory>
+#include "vector/vector.h"
 
 namespace olive
 {
@@ -14,40 +16,46 @@ namespace olive
 
   class Indexer
   {
+    public:
+      // get_index(const Vec<float> &data);
+      // set_index(const Vec<float> &data);
   };
 
   class Query
   {
+    protected:
+      virtual float similarity(const Vec<float> &query, const Vec<float> &data) = 0;
     public:
-      virtual std::vector<float> _search(const std::vector<float> &query, int num_results)=0;
+      virtual Vec<float> search(const Vec<float> &query, int num_results);
   };
 
-  template <typename Derived>
-  class SearchEngine: public Query
+  class SearchEngine
   {
+    protected:
+      virtual std::unique_ptr<Query> query_type() = 0;
     public:
-      std::vector<float> search(const std::vector<float> &query, int num_results){
-        return static_cast<Derived*>(this)->_search(query, num_results);
+      Vec<float> search(const Vec<float> &query, int num_results){
+        return query_type()->search(query, num_results);
       }
   };
 
   class Storage
   {
     public:
-      virtual void _persist(const std::vector<float> &data) = 0;
-      virtual std::vector<float> _load() = 0;
+      virtual void persist(const Vec<float> &data) = 0;
+      virtual Vec<float> load() = 0;
   };
 
-  template <typename Derived>
-  class StorageEngine: public Storage
+  class StorageEngine
   {
+    protected:
+      virtual std::unique_ptr<Storage> storage_type() = 0;
     public:
-      void persist(const std::vector<float> &data){
-        static_cast<Derived*>(this)->_persist(data);
+      void persist(const Vec<float> &data){
+        storage_type()->persist(data);
       }
-
-      std::vector<float> load(){
-        return static_cast<Derived*>(this)->_load();
+      Vec<float> load(){
+        return storage_type()->load();
       }
   };
 

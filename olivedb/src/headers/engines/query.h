@@ -1,31 +1,46 @@
 #pragma once
+#include <cmath>
 #include "engines/engine.h"
 
 
 namespace olive
 {
-  class CosineSimilarityEngine : public Query
+  class CosineSimilarity : public Query
   {
+    protected:
+      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override{
+        return query.dot(data) / (query.norm() * data.norm());
+      }
   };
 
-  class JaccardSimilarityEngine : public Query
+  class JaccardSimilarity : public Query
   {
+    protected:
+      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override;
   };
 
-  class EuclideanSimilarityEngine : public Query
+  class EuclideanSimilarity : public Query
   {
+    protected:
+      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override{
+        return std::sqrt((query - data).pow(2).sum());
+      }
   };
 
-  class ManhattanSimilarityEngine : public Query
+  class ManhattanSimilarity : public Query
   {
+    protected:
+      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override{
+        return (query - data).abs().sum();
+      }
   };
 
-  class HammingSimilarityEngine : public Query
+  class HammingSimilarity : public Query
   {
-  };
-
-  class DotProductSimilarityEngine : public Query
-  {
+    protected:
+      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override{
+        return (query != data).sum();
+      }
   };
 
 } // namespace olive
