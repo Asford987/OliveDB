@@ -1,8 +1,11 @@
 #pragma once
-#include "engines/query.h"
-#include "engines/storage.h"
+#include "engines/query/query.h"
+#include "engines/storage/storage.h"
+#include "vector/vec.h"
 
 #include <iostream>
+#include <string>
+#include <memory>
 
 
 namespace olive
@@ -18,7 +21,6 @@ namespace olive
 
   class OliveDBSettings
   {
-    friend class OliveBuilder;
     friend class OliveDB;
     
     private:
@@ -27,10 +29,15 @@ namespace olive
       int ndim;
       Preprocessor preprocessor;
       // there may be more settings in the future
-      OliveDBSettings();
 
     public:
       friend std::ostream& operator<<(std::ostream& os, const OliveDBSettings& settings);
+      OliveDBSettings();
+      void set_storage(const std::string& storage);
+      void set_distance_method(const std::string& distance_method);
+      void set_ndim(int ndim);
+      void set_preprocessor(...);
+
   };
 
   class OliveBuilder
@@ -51,22 +58,22 @@ namespace olive
       }
 
       OliveBuilder& storage(const std::string& storage){
-        settings.storage = storage;
+        settings.set_storage(storage);
         return *this;
       }
       
       OliveBuilder& distance_method(const std::string& distance_method){
-        settings.distance_method = distance_method;
+        settings.set_distance_method(distance_method);
         return *this;
       }
 
       OliveBuilder& ndim(int ndim){
-        settings.ndim = ndim;
+        settings.set_ndim(ndim);
         return *this;
       }
 
-      OliveBuilder& preprocessor(bool to_lowercase){
-        settings.preprocessor = Preprocessor();
+      OliveBuilder& preprocessor(...){
+        settings.set_preprocessor();
         return *this;
       }
   };
@@ -77,22 +84,17 @@ namespace olive
     
     private:
       OliveDBSettings settings;
-      bool is_active = false;
       OliveDB(const OliveDBSettings& settings): settings(settings){};
     public:
       static OliveBuilder builder();
 
-      bool activate(); // turns the flag is_active to true, creates the necessary files and directories, initializes the storage engine and the query engine and returns a self reference
-      bool deactivate(); // turns the flag is_active to false, closes the necessary files and directories, deletes the storage engine and the query engine and returns a self reference
       std::unique_ptr<Indexer> indexer_type() override;
       std::unique_ptr<Storage> storage_type() override;
       std::unique_ptr<Query> query_type() override;
+      std::string storage_path() override;
       Vec<Vec<float>> loaded_data() override;
       ~OliveDB(){
-        if(is_active){
-          deactivate();
-        }
-
+        deactivate();
       }
   };
 

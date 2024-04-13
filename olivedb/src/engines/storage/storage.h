@@ -1,4 +1,8 @@
-
+#pragma once
+#include <string>
+#include <vector>
+#include <cstdint>
+#include "vector/vec.h"
 
 namespace olive
 {
@@ -8,7 +12,7 @@ namespace olive
       virtual void persist(const Vec<Vec<float>> &data) = 0;
       virtual Vec<Vec<float>> load_by_id(const Vec<uint64_t> &ids) = 0;
       virtual Vec<Vec<float>> load_by_index(const Vec<uint64_t> &indexes) = 0; //! Change argument type when figure out how to index data
-      virtual bool activate() = 0;
+      virtual bool activate(std::string path) = 0;
       virtual bool deactivate() = 0;
   };
 
@@ -18,7 +22,7 @@ namespace olive
       void persist(const Vec<Vec<float>> &data) override;
       Vec<Vec<float>> load_by_id(const Vec<uint64_t> &ids) override;
       Vec<Vec<float>> load_by_index(const Vec<uint64_t> &indexes) override;
-      bool activate() override{ return true; }
+      bool activate(std::string path) override{ return true; }
       bool deactivate() override{ return false; }
   };
 
@@ -28,7 +32,7 @@ namespace olive
       void persist(const Vec<Vec<float>> &data) override;
       Vec<Vec<float>> load_by_id(const Vec<uint64_t> &ids) override;
       Vec<Vec<float>> load_by_index(const Vec<uint64_t> &indexes) override;
-      bool activate() override;
+      bool activate(std::string path) override;
       bool deactivate() override;
   };
 
@@ -38,7 +42,7 @@ namespace olive
       void persist(const Vec<Vec<float>> &data) override;
       Vec<Vec<float>> load_by_id(const Vec<uint64_t> &ids) override;
       Vec<Vec<float>> load_by_index(const Vec<uint64_t> &indexes) override;
-      bool activate() override;
+      bool activate(std::string path) override;
       bool deactivate() override;
   };
 

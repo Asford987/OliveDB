@@ -27,4 +27,12 @@ namespace olive
   {
     return storage_type()->load_by_id(ids);
   }
+
+  Vec<Vec<float>> StorageEngine::load_by_index(const Vec<uint64_t> &indexes){
+    return storage_type()->load_by_index(indexes);
+  }
+
+  Vec<Vec<float>> StorageEngine::load_by_proximity(const Vec<float> &query){
+
+  }
 } // namespace olive

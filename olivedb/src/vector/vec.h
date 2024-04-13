@@ -14,8 +14,6 @@ namespace olive
   template <typename T>
   class Vec: public std::vector<T>
   {
-    friend class CosineSimilarity;
-
     private:
       Metadata meta;
     public:
