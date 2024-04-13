@@ -59,6 +59,7 @@ namespace olive
       std::string distance_method;      
       int ndim;
       Preprocessor preprocessor;
+      std::map<int, Indexer*> indexers;
       // there may be more settings in the future
 
     public:
@@ -67,7 +68,9 @@ namespace olive
       void set_storage(const std::string& storage);
       void set_distance_method(const std::string& distance_method);
       void set_ndim(int ndim);
-      void set_preprocessor(...);
+      void set_preprocessor(Preprocessor preprocessor);
+      void set_indexer(int layer, Indexer* indexer); 
+
 
   };
 
@@ -103,21 +106,30 @@ namespace olive
         return *this;
       }
 
-      OliveBuilder& preprocessor(...){
-        settings.set_preprocessor();
+      OliveBuilder& preprocessor(Preprocessor preprocessor){
+        settings.set_preprocessor(preprocessor);
+        return *this;
+      }
+
+      OliveBuilder& indexer(int layer, Indexer* indexer){
+        settings.set_indexer(layer, indexer);
         return *this;
       }
   };
 
-  class OliveDB: public StorageEngine, public SearchEngine
+  class OliveDB: public StorageEngine, public SearchEngine, public IndexerEngine
   {
     friend class OliveBuilder;
     
     private:
       OliveDBSettings settings;
-      OliveDB(const OliveDBSettings& settings): settings(settings){};
+      
+      OliveDB(const OliveDBSettings& settings): settings(settings){
+
+      };
     public:
       static OliveBuilder builder();
+
 
       IndexerEngine indexer_engine() override;
       std::unique_ptr<Storage> storage_type() override;

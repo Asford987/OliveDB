@@ -19,7 +19,32 @@ namespace olive
     ndim = 0;
   }
 
-  Vec<Vec<float>> loaded_data(){
+  void OliveDBSettings::set_storage(const std::string& storage)
+  {
+    this->storage = storage;
+  }
+
+  void OliveDBSettings::set_distance_method(const std::string& distance_method)
+  {
+    this->distance_method = distance_method;
+  }
+
+  void OliveDBSettings::set_ndim(int ndim)
+  {
+    this->ndim = ndim;
+  }
+
+  void OliveDBSettings::set_preprocessor(Preprocessor preprocessor)
+  {
+    this->preprocessor = preprocessor;
+  }
+
+  void OliveDBSettings::set_indexer(int layer, Indexer* indexer)
+  {
+    indexers[layer] = indexer;
+  }
+
+  Vec<Vec<float>> OliveDB::loaded_data(){
     // check if data was already loaded
     // if not, load data with storage engine's methods
     return Vec<Vec<float>>();
