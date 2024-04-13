@@ -5,6 +5,13 @@
 
 namespace olive
 {
+
+  class Query
+  {
+    public:
+      inline virtual float similarity(const Vec<float> &query, const Vec<float> &data) = 0;
+  };
+
   class CosineSimilarity : public Query
   {
     public:

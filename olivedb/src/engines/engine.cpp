@@ -7,7 +7,7 @@
 
 namespace olive
 {
-  std::map<size_t, float> SearchEngine::search(const Vec<float> &query, int num_results)
+  std::map<uint64_t, float> SearchEngine::search(const Vec<float> &query, int num_results)
   {
     Vec<Vec<float>> data = loaded_data();
     std::map<uint64_t, float> results; 
