@@ -41,8 +41,10 @@ namespace olive
   {
     public:
       virtual void persist(const Vec<Vec<float>> &data) = 0;
-      virtual Vec<Vec<float>> load_by_id(const Vec<int> &ids) = 0;
-      virtual Vec<Vec<float>> load_by_index(const Vec<int> &indexes) = 0; //! Change argument type when figure out how to index data
+      virtual Vec<Vec<float>> load_by_id(const Vec<uint64_t> &ids) = 0;
+      virtual Vec<Vec<float>> load_by_index(const Vec<uint64_t> &indexes) = 0; //! Change argument type when figure out how to index data
+      virtual bool activate() = 0;
+      virtual bool deactivate() = 0;
   };
 
   class StorageEngine
@@ -51,8 +53,10 @@ namespace olive
       virtual std::unique_ptr<Indexer> indexer_type() = 0;
       virtual std::unique_ptr<Storage> storage_type() = 0;
     public:
+      bool activate(){ return storage_type()->activate(); }
+      bool deactivate(){ return storage_type()->deactivate(); }
       void persist(const Vec<Vec<float>> &data);
-      Vec<Vec<float>> load_by_id(const Vec<int> &ids);
+      Vec<Vec<float>> load_by_id(const Vec<uint64_t> &ids);
 
       // Vec<Vec<float>> load_by_index(const Vec<int> &indexes){
       //   return storage_type()->load_by_index(indexes);

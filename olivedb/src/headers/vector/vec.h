@@ -1,15 +1,31 @@
 #pragma once
 #include <vector>
+#include <cstdint>
 
 namespace olive
 {
+
+  class Metadata
+  {
+    public:
+      uint64_t id=0;
+  };
   
   template <typename T>
   class Vec: public std::vector<T>
   {
+    friend class CosineSimilarity;
+
+    private:
+      Metadata meta;
     public:
       using std::vector<T>::vector;
-      size_t id=0;
+      
+      // metadata for Vec. Temporary solution: using size_t as id. Will be created a new class for metadata
+      Metadata metadata(){
+        return meta;
+      }
+
       Vec<T> operator+(const Vec<T> &other) const;
       Vec<T> operator-(const Vec<T> &other) const;
       Vec<T> operator*(const Vec<T> &other) const;

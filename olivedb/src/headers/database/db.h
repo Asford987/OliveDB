@@ -7,6 +7,15 @@
 
 namespace olive
 {
+
+  // enum class QueryType{
+  //   COSINE=CosineSimilarity,
+  //   JACCARD=JaccardSimilarity,
+  //   EUCLIDEAN=EuclideanSimilarity,
+  //   MANHATTAN=ManhattanSimilarity,
+  //   HAMMING=HammingSimilarity
+  // };
+
   class OliveDBSettings
   {
     friend class OliveBuilder;
@@ -62,7 +71,7 @@ namespace olive
       }
   };
 
-  class OliveDB
+  class OliveDB: public StorageEngine, public SearchEngine
   {
     friend class OliveBuilder;
     
@@ -74,6 +83,17 @@ namespace olive
       static OliveBuilder builder();
 
       OliveDB& activate(); // turns the flag is_active to true, creates the necessary files and directories, initializes the storage engine and the query engine and returns a self reference
+      OliveDB& deactivate(); // turns the flag is_active to false, closes the necessary files and directories, deletes the storage engine and the query engine and returns a self reference
+      std::unique_ptr<Indexer> indexer_type() override;
+      std::unique_ptr<Storage> storage_type() override;
+      std::unique_ptr<Query> query_type() override;
+      Vec<Vec<float>> loaded_data() override;
+      ~OliveDB(){
+        if(is_active){
+          deactivate();
+        }
+
+      }
   };
 
 } // namespace olive

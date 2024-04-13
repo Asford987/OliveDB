@@ -1,3 +1,8 @@
+#include <map>
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <cstdint>
 #include "engine.h"
 
 namespace olive
@@ -5,10 +10,10 @@ namespace olive
   std::map<size_t, float> SearchEngine::search(const Vec<float> &query, int num_results)
   {
     Vec<Vec<float>> data = loaded_data();
-    std::map<size_t, float> results; //! Temporary solution for Vec metadata: using size_t as id
+    std::map<uint64_t, float> results; 
     for(auto &d : data)
     {
-      // results[d] = query_type()->similarity(query, d); // Make it results[id] = similarity
+      results[d.metadata().id] = query_type()->similarity(query, d);
     }
     return results;
   }
@@ -18,7 +23,7 @@ namespace olive
     storage_type()->persist(data);
   }
 
-  Vec<Vec<float>> StorageEngine::load_by_id(const Vec<int> &ids)
+  Vec<Vec<float>> StorageEngine::load_by_id(const Vec<uint64_t> &ids)
   {
     return storage_type()->load_by_id(ids);
   }

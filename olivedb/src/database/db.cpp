@@ -11,5 +11,18 @@ namespace olive
     << settings.preprocessor << "\n\t)"; 
     return os;
   }
-  
+
+  OliveDBSettings::OliveDBSettings()
+  {
+    storage = "memory";
+    distance_method = "cosine";
+    ndim = 0;
+  }
+
+  Vec<Vec<float>> loaded_data(){
+    // check if data was already loaded
+    // if not, load data with storage engine's methods
+    return Vec<Vec<float>>();
+  }
+
 } // namespace olive
