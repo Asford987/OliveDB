@@ -1,4 +1,4 @@
-#include "vector/vector.h"
+#include "vector/vec.h"
 
 namespace olive
 {
@@ -301,7 +301,7 @@ namespace olive
     template <typename T>
     T Vec<T>::min() const
     {
-      return *this[argmin()];
+      return this->at(argmin());
     }
 
     template <typename T>
@@ -321,7 +321,7 @@ namespace olive
     template <typename T>
     T Vec<T>::max() const
     {
-      return *this[argmax()];
+      return this->argmax();
     }
 
     template <typename T>

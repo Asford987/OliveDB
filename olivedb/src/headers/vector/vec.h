@@ -8,6 +8,8 @@ namespace olive
   class Vec: public std::vector<T>
   {
     public:
+      using std::vector<T>::vector;
+      size_t id=0;
       Vec<T> operator+(const Vec<T> &other) const;
       Vec<T> operator-(const Vec<T> &other) const;
       Vec<T> operator*(const Vec<T> &other) const;

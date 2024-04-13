@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include <map>
-#include "vector/vector.h"
+#include "vector/vec.h"
 
 namespace olive
 {
@@ -34,7 +34,7 @@ namespace olive
       virtual std::unique_ptr<Query> query_type() = 0;
       virtual Vec<Vec<float>> loaded_data() = 0;
     public:
-      std::map<Vec<float>, float> search(const Vec<float> &query, int num_results);
+      std::map<size_t, float> search(const Vec<float> &query, int num_results);
   };
 
   class Storage

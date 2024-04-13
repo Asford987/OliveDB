@@ -2,11 +2,15 @@
 
 namespace olive
 {
-  std::map<Vec<float>, float> SearchEngine::search(const Vec<float> &query, int num_results)
+  std::map<size_t, float> SearchEngine::search(const Vec<float> &query, int num_results)
   {
     Vec<Vec<float>> data = loaded_data();
-    // compute similarities between query and data and order the results
-    return std::map<Vec<float>, float>();
+    std::map<size_t, float> results; //! Temporary solution for Vec metadata: using size_t as id
+    for(auto &d : data)
+    {
+      // results[d] = query_type()->similarity(query, d); // Make it results[id] = similarity
+    }
+    return results;
   }
 
   void StorageEngine::persist(const Vec<Vec<float>> &data)
