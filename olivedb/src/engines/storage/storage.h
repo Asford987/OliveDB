@@ -26,7 +26,7 @@ namespace olive
       bool deactivate() override{ return false; }
   };
 
-  class DefaultDiskStorage : public Storage
+  class DiskStorage : public Storage
   {
     public:
       void persist(const Vec<Vec<float>> &data) override;

@@ -6,17 +6,48 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <map>
+#include <functional>
 
 
 namespace olive
 {
 
-  // enum class QueryType{
-  //   COSINE=CosineSimilarity,
-  //   JACCARD=JaccardSimilarity,
-  //   EUCLIDEAN=EuclideanSimilarity,
-  //   MANHATTAN=ManhattanSimilarity,
-  //   HAMMING=HammingSimilarity
+  enum class QueryType{
+    COSINE,
+    JACCARD,
+    EUCLIDEAN,
+    MANHATTAN,
+    HAMMING
+  };
+
+  enum class StorageType{
+    MEMORY,
+    DISK,
+    MONGO,
+
+  };
+
+  // std::map<QueryType, std::function<std::unique_ptr<Query>>> query_creators = {
+  //     {QueryType::COSINE, []() -> std::unique_ptr<Query>
+  //      { return std::make_unique<CosineSimilarity>(); }},
+  //     {QueryType::JACCARD, []() -> std::unique_ptr<Query>
+  //      { return std::make_unique<JaccardSimilarity>(); }},
+  //     {QueryType::EUCLIDEAN, []() -> std::unique_ptr<Query>
+  //      { return std::make_unique<EuclideanSimilarity>(); }},
+  //     {QueryType::MANHATTAN, []() -> std::unique_ptr<Query>
+  //      { return std::make_unique<ManhattanSimilarity>(); }},
+  //     {QueryType::HAMMING, []() -> std::unique_ptr<Query>
+  //      { return std::make_unique<HammingSimilarity>(); }},
+  // };
+
+  // std::map<StorageType, std::function<std::unique_ptr<Storage>>> storage_creators = {
+  //     {StorageType::MEMORY, []() -> std::unique_ptr<Storage>
+  //      { return std::make_unique<MemoryStorage>(); }},
+  //     {StorageType::DISK, []() -> std::unique_ptr<Storage>
+  //      { return std::make_unique<DiskStorage>(); }},
+  //     {StorageType::MONGO, []() -> std::unique_ptr<Storage>
+  //      { return std::make_unique<MongoStorage>(); }},
   // };
 
   class OliveDBSettings

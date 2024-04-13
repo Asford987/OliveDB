@@ -19,9 +19,11 @@ namespace olive
 
   class Indexer
   {
+    private:
+      uint64_t get_index(const Vec<float> &data);
     public:
-      // get_index(const Vec<float> &data);
-      // set_index(const Vec<float> &data);
+      Vec<Vec<uint64_t>> retrieve_candidates_ids(const Vec<Vec<float>> &query);
+      void set_index(const Vec<Vec<float>> &data);
   };
 
 } // namespace olive
