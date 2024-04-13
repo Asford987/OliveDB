@@ -7,40 +7,32 @@ namespace olive
 {
   class CosineSimilarity : public Query
   {
-    protected:
-      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override{
-        return query.dot(data) / (query.norm() * data.norm());
-      }
+    public:
+      inline float similarity(const Vec<float> &query, const Vec<float> &data) override;
   };
 
   class JaccardSimilarity : public Query
   {
-    protected:
-      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override;
+    public:
+      inline float similarity(const Vec<float> &query, const Vec<float> &data) override;
   };
 
   class EuclideanSimilarity : public Query
   {
-    protected:
-      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override{
-        return std::sqrt((query - data).pow(2).sum());
-      }
+    public:
+      inline float similarity(const Vec<float> &query, const Vec<float> &data) override;
   };
 
   class ManhattanSimilarity : public Query
   {
-    protected:
-      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override{
-        return (query - data).abs().sum();
-      }
+    public:
+      inline float similarity(const Vec<float> &query, const Vec<float> &data) override;
   };
 
   class HammingSimilarity : public Query
   {
-    protected:
-      virtual float similarity(const Vec<float> &query, const Vec<float> &data) override{
-        return (query != data).sum();
-      }
+    public:
+      inline float similarity(const Vec<float> &query, const Vec<float> &data) override;
   };
 
 } // namespace olive
