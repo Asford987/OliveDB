@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <memory>
 #include <map>
+#include <functional>
 #include "vector/vec.h"
 #include "engines/storage/storage.h"
 #include "engines/query/query.h"
@@ -15,9 +16,15 @@ namespace olive
 
   class Preprocessor
   {
-
-  public:
-    friend std::ostream &operator<<(std::ostream &os, const Preprocessor &preprocessor);
+    private:
+      std::vector<std::string> preprocess_order;
+      std::map<std::string, std::function<Vec<Vec<float>>>> preprocess_functions;
+    public:
+      friend std::ostream &operator<<(std::ostream &os, const Preprocessor &preprocessor);
+      Preprocessor& add_preprocess_function(const std::string &name, std::function<Vec<Vec<float>>> func);
+      Vec<Vec<float>> apply();
+      Preprocessor();
+      Preprocessor(const std::vector<std::string> &preprocess_order, const std::map<std::string, std::function<Vec<Vec<float>>>> &preprocess_functions);
   };
 
   class SearchEngine
