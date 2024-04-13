@@ -8,6 +8,7 @@
 #include "engines/storage/storage.h"
 #include "engines/query/query.h"
 #include "vector/vec.h"
+#include "engines/indexer/indexer.h"
 
 namespace olive
 {
@@ -17,13 +18,6 @@ namespace olive
 
   public:
     friend std::ostream &operator<<(std::ostream &os, const Preprocessor &preprocessor);
-  };
-
-  class Indexer
-  {
-    public:
-      // get_index(const Vec<float> &data);
-      // set_index(const Vec<float> &data);
   };
 
   class SearchEngine
@@ -38,7 +32,7 @@ namespace olive
   class StorageEngine
   {
     protected:
-      virtual std::unique_ptr<Indexer> indexer_type() = 0;
+      virtual IndexerEngine indexer_engine() = 0;
       virtual std::unique_ptr<Storage> storage_type() = 0;
       virtual std::string storage_path() = 0;
     public:
@@ -54,6 +48,10 @@ namespace olive
       Vec<Vec<float>> load_by_proximity(const Vec<float> &query); //{
       //   look for data with similar index to query, the load_by_index (don't know how to implement this yet)
       // }
+  };
+
+  class IndexerEngine{
+
   };
 
 } // namespace olive

@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+#include <type_traits>
 #include <cstdint>
+#include "engines/indexer/indexer.h"
 
 namespace olive
 {
@@ -14,14 +16,19 @@ namespace olive
   template <typename T>
   class Vec: public std::vector<T>
   {
-    private:
-      Metadata meta;
-    public:
-      using std::vector<T>::vector;
-      
-      // metadata for Vec. Temporary solution: using size_t as id. Will be created a new class for metadata
-      Metadata metadata(){
-        return meta;
+
+  friend class MetadataModifier;
+
+  private:
+    Metadata meta;
+
+  public:
+    using std::vector<T>::vector;
+
+    // metadata for Vec. Temporary solution: using size_t as id. Will be created a new class for metadata
+    Metadata metadata()
+    {
+      return meta;
       }
 
       Vec<T> operator+(const Vec<T> &other) const;

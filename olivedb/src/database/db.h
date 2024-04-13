@@ -88,7 +88,7 @@ namespace olive
     public:
       static OliveBuilder builder();
 
-      std::unique_ptr<Indexer> indexer_type() override;
+      IndexerEngine indexer_engine() override;
       std::unique_ptr<Storage> storage_type() override;
       std::unique_ptr<Query> query_type() override;
       std::string storage_path() override;
