@@ -68,6 +68,9 @@ namespace olive
       Vec<T> slice(int start) const;
       Vec<T> append(const Vec<T> &other) const;
       Vec<T> prepend(const Vec<T> &other) const;
+      Vec<Vec<T>> unsqueeze() const;
+      T squeeze(size_t idx) const;
+      Vec<T> flatten() const;
   };
 
 } // namespace olive

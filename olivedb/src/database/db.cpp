@@ -4,6 +4,43 @@
 namespace olive
 {
 
+  std::ostream& operator<<(std::ostream& os, const StorageType storage_type){
+    switch(storage_type){
+      case StorageType::MEMORY:
+        os << "MEMORY";
+        break;
+      case StorageType::DISK:
+        os << "DISK";
+        break;
+      case StorageType::MONGO:
+        os << "MONGO";
+        break;
+    }
+    return os;
+  }
+
+  std::ostream& operator<<(std::ostream& os, const QueryType query_type){
+    switch(query_type){
+      case QueryType::COSINE:
+        os << "COSINE";
+        break;
+      case QueryType::JACCARD:
+        os << "JACCARD";
+        break;
+      case QueryType::EUCLIDEAN:
+        os << "EUCLIDEAN";
+        break;
+      case QueryType::MANHATTAN:
+        os << "MANHATTAN";
+        break;
+      case QueryType::HAMMING:
+        os << "HAMMING";
+        break;
+    }
+    return os;
+  }
+  
+
   std::ostream& operator<<(std::ostream& os, const OliveDBSettings& settings)
   {
     os << "OliveDBSettings(\n\tstorage=" << settings.storage << ",\n\tdistance_method=" 
@@ -14,17 +51,17 @@ namespace olive
 
   OliveDBSettings::OliveDBSettings()
   {
-    storage = "memory";
-    distance_method = "cosine";
+    storage = StorageType::MEMORY;
+    distance_method = QueryType::COSINE;
     ndim = 0;
   }
 
-  void OliveDBSettings::set_storage(const std::string& storage)
+  void OliveDBSettings::set_storage(StorageType storage)
   {
     this->storage = storage;
   }
 
-  void OliveDBSettings::set_distance_method(const std::string& distance_method)
+  void OliveDBSettings::set_distance_method(QueryType distance_method)
   {
     this->distance_method = distance_method;
   }

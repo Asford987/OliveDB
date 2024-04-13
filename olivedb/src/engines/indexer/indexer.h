@@ -20,16 +20,17 @@ namespace olive
   class Indexer
   {
     private:
-      virtual uint64_t get_index(const Vec<float> &data) = 0;
+      virtual Vec<uint64_t> get_indexes(const Vec<float> &query) = 0;
+      virtual Vec<uint64_t> get_indexes(const Vec<uint64_t> &shortlist) = 0;
     public:
-      Vec<Vec<uint64_t>> retrieve_candidates_ids(const Vec<Vec<float>> &query);
+      Vec<uint64_t> retrieve_candidate_ids(const Vec<Vec<float>> &query);
       void set_index(const Vec<Vec<float>> &data);
   };
 
   class LSHIndexer : public Indexer
   {
     private:
-      uint64_t get_index(const Vec<float> &data) override;
+      Vec<uint64_t> get_indexes(const Vec<float> &query) override;
     public:
       LSHIndexer(int ndim, int nhashes, int ntables);
   };
@@ -37,7 +38,7 @@ namespace olive
   class HNSWIndexer : public Indexer
   {
     private:
-      uint64_t get_index(const Vec<float> &data) override;
+      Vec<uint64_t> get_indexes(const Vec<float> &query) override;
     public:
       HNSWIndexer(int ndim, int nhashes, int ntables);
   };

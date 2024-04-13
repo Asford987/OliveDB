@@ -389,4 +389,31 @@ namespace olive
       return result;
     }
 
+    template <typename T>
+    Vec<Vec<T>> Vec<T>::unsqueeze() const 
+    {
+      Vec<Vec<T>> result = { *this };
+      return result;
+    }
+
+    template <typename T>
+    T Vec<T>::squeeze(size_t idx) const 
+    {
+      return this->at(idx);
+    }
+
+    template <typename T>
+    Vec<T> Vec<T>::flatten() const
+    {
+      Vec<T> flat;
+      for (auto &v : *this)
+      {
+        for (auto &e : v)
+        {
+          flat.push_back(e);
+        }
+      }
+      return flat;
+    }
+
 } // namespace olive

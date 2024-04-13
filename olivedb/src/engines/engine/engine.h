@@ -32,7 +32,6 @@ namespace olive
   class StorageEngine
   {
     protected:
-      virtual IndexerEngine indexer_engine() = 0;
       virtual std::unique_ptr<Storage> storage_type() = 0;
       virtual std::string storage_path() = 0;
     public:
@@ -45,9 +44,6 @@ namespace olive
       //   return storage_type()->load_by_index(indexes);
       // }
 
-      Vec<Vec<float>> load_by_proximity(const Vec<float> &query); //{
-      //   look for data with similar index to query, the load_by_index (don't know how to implement this yet)
-      // }
   };
 
   class IndexerEngine{

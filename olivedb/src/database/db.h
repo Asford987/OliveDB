@@ -55,8 +55,8 @@ namespace olive
     friend class OliveDB;
     
     private:
-      std::string storage;
-      std::string distance_method;      
+      StorageType storage;
+      QueryType distance_method;      
       int ndim;
       Preprocessor preprocessor;
       std::map<int, Indexer*> indexers;
@@ -65,8 +65,8 @@ namespace olive
     public:
       friend std::ostream& operator<<(std::ostream& os, const OliveDBSettings& settings);
       OliveDBSettings();
-      void set_storage(const std::string& storage);
-      void set_distance_method(const std::string& distance_method);
+      void set_storage(const StorageType storage);
+      void set_distance_method(const QueryType distance_method);
       void set_ndim(int ndim);
       void set_preprocessor(Preprocessor preprocessor);
       void set_indexer(int layer, Indexer* indexer); 
@@ -91,12 +91,12 @@ namespace olive
         return OliveDB(settings);
       }
 
-      OliveBuilder& storage(const std::string& storage){
+      OliveBuilder& storage(const StorageType storage){
         settings.set_storage(storage);
         return *this;
       }
       
-      OliveBuilder& distance_method(const std::string& distance_method){
+      OliveBuilder& distance_method(const QueryType distance_method){
         settings.set_distance_method(distance_method);
         return *this;
       }
@@ -111,8 +111,13 @@ namespace olive
         return *this;
       }
 
-      OliveBuilder& indexer(int layer, Indexer* indexer){
-        settings.set_indexer(layer, indexer);
+      OliveBuilder& global_indexer(Indexer* indexer){
+        settings.set_indexer(0, indexer);
+        return *this;
+      }
+
+      OliveBuilder& local_indexer(Indexer* indexer){
+        settings.set_indexer(1, indexer);
         return *this;
       }
   };
@@ -131,7 +136,6 @@ namespace olive
       static OliveBuilder builder();
 
 
-      IndexerEngine indexer_engine() override;
       std::unique_ptr<Storage> storage_type() override;
       std::unique_ptr<Query> query_type() override;
       std::string storage_path() override;
