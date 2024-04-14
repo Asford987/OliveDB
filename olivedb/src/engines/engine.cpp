@@ -3,7 +3,7 @@
 #include <vector>
 #include <cmath>
 #include <cstdint>
-#include "engines/engine/engine.h"
+#include "engines/engine.h"
 
 namespace olive
 {

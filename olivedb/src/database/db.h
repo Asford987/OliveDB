@@ -1,6 +1,6 @@
 #pragma once
-#include "engines/query/query.h"
-#include "engines/storage/storage.h"
+#include "query/query.h"
+#include "storage/storage.h"
 #include "vector/vec.h"
 
 #include <iostream>

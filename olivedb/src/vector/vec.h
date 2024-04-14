@@ -2,16 +2,12 @@
 #include <vector>
 #include <type_traits>
 #include <cstdint>
-#include "engines/indexer/indexer.h"
+#include "indexer/indexer.h"
+#include "metadata/modifier.h"
+#include "metadata/metadata.h"
 
 namespace olive
 {
-
-  class Metadata
-  {
-    public:
-      uint64_t id=0;
-  };
   
   template <typename T>
   class Vec: public std::vector<T>

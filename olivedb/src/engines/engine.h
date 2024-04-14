@@ -6,10 +6,9 @@
 #include <map>
 #include <functional>
 #include "vector/vec.h"
-#include "engines/storage/storage.h"
-#include "engines/query/query.h"
-#include "vector/vec.h"
-#include "engines/indexer/indexer.h"
+#include "storage/storage.h"
+#include "query/query.h"
+#include "indexer/indexer.h"
 
 namespace olive
 {
@@ -17,14 +16,25 @@ namespace olive
   class Preprocessor
   {
     private:
-      std::vector<std::string> preprocess_order;
-      std::map<std::string, std::function<Vec<Vec<float>>>> preprocess_functions;
+      std::function<Vec<Vec<float>>(std::vector<std::string>)> preprocess_function;
+
     public:
       friend std::ostream &operator<<(std::ostream &os, const Preprocessor &preprocessor);
-      Preprocessor& add_preprocess_function(const std::string &name, std::function<Vec<Vec<float>>> func);
-      Vec<Vec<float>> apply();
-      Preprocessor();
-      Preprocessor(const std::vector<std::string> &preprocess_order, const std::map<std::string, std::function<Vec<Vec<float>>>> &preprocess_functions);
+      Vec<Vec<float>> apply(std::vector<std::string> &sentence){ return preprocess_function(sentence);}
+      
+      Preprocessor& operator=(const Preprocessor &preprocessor){ 
+        preprocess_function = preprocessor.preprocess_function;
+        return *this;
+      }
+
+      Preprocessor &add_preprocess_function(std::function<Vec<Vec<float>>(std::vector<std::string>)> &preprocess_function)
+      {
+        this->preprocess_function = preprocess_function;
+        return *this;
+      }
+
+      Preprocessor(): preprocess_function([](std::vector<std::string> sentence){ return Vec<Vec<float>>(); }) {}
+      Preprocessor(std::function<Vec<Vec<float>>(std::vector<std::string>)> &preprocess_function) : preprocess_function(preprocess_function) {}
   };
 
   class SearchEngine
