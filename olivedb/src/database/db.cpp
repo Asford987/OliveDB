@@ -81,6 +81,83 @@ namespace olive
     indexers[layer] = indexer;
   }
 
+  OliveBuilder::OliveBuilder()
+  {
+    settings = OliveDBSettings();
+  }
+
+  void OliveBuilder::display_settings()
+  {
+    std::cout << settings << std::endl;
+  }
+
+  OliveDB OliveBuilder::build()
+  {
+    return OliveDB(settings);
+  }
+
+  OliveBuilder &OliveBuilder::storage(const StorageType storage)
+  {
+    settings.set_storage(storage);
+    return *this;
+  }
+
+  OliveBuilder &OliveBuilder::distance_method(const QueryType distance_method)
+  {
+    settings.set_distance_method(distance_method);
+    return *this;
+  }
+
+  OliveBuilder &OliveBuilder::ndim(int ndim)
+  {
+    settings.set_ndim(ndim);
+    return *this;
+  }
+
+  OliveBuilder &OliveBuilder::preprocessor(Preprocessor preprocessor)
+  {
+    settings.set_preprocessor(preprocessor);
+    return *this;
+  }
+
+  OliveBuilder &OliveBuilder::global_indexer(Indexer *indexer)
+  {
+    settings.set_indexer(0, indexer);
+    return *this;
+  }
+
+  OliveBuilder &OliveBuilder::local_indexer(Indexer *indexer)
+  {
+    settings.set_indexer(1, indexer);
+    return *this;
+  }
+
+  OliveDB::OliveDB(const OliveDBSettings& settings): settings(settings)
+  {
+  }
+
+  OliveBuilder OliveDB::builder()
+  {
+    return OliveBuilder();
+  }
+
+  std::unique_ptr<Storage> OliveDB::storage_type()
+  {
+
+  }
+
+  std::unique_ptr<Query> OliveDB::query_type()
+  {
+
+  }
+
+  std::string OliveDB::storage_path()
+  {
+
+  }
+
+  
+
   Vec<Vec<float>> OliveDB::loaded_data(){
     // check if data was already loaded
     // if not, load data with storage engine's methods

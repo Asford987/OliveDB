@@ -18,6 +18,15 @@ namespace olive
     return results;
   }
 
+  bool StorageEngine::activate()
+  {
+    return storage_type()->activate(storage_path());
+  }
+  bool StorageEngine::deactivate()
+  { 
+    return storage_type()->deactivate(); 
+  }
+
   void StorageEngine::persist(const Vec<Vec<float>> &data)
   {
     storage_type()->persist(data);

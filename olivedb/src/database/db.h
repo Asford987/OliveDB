@@ -2,6 +2,7 @@
 #include "query/query.h"
 #include "storage/storage.h"
 #include "vector/vec.h"
+#include "preprocess/preprocess.h"
 
 #include <iostream>
 #include <string>
@@ -92,47 +93,15 @@ namespace olive
     private:
       OliveDBSettings settings;
     public:
-      OliveBuilder(){
-        settings = OliveDBSettings();
-      }
-
-      void display_settings(){
-        std::cout << settings << std::endl;
-      }
-
-      OliveDB build(){
-        return OliveDB(settings);
-      }
-
-      OliveBuilder& storage(const StorageType storage){
-        settings.set_storage(storage);
-        return *this;
-      }
-      
-      OliveBuilder& distance_method(const QueryType distance_method){
-        settings.set_distance_method(distance_method);
-        return *this;
-      }
-
-      OliveBuilder& ndim(int ndim){
-        settings.set_ndim(ndim);
-        return *this;
-      }
-
-      OliveBuilder& preprocessor(Preprocessor preprocessor){
-        settings.set_preprocessor(preprocessor);
-        return *this;
-      }
-
-      OliveBuilder& global_indexer(Indexer* indexer){
-        settings.set_indexer(0, indexer);
-        return *this;
-      }
-
-      OliveBuilder& local_indexer(Indexer* indexer){
-        settings.set_indexer(1, indexer);
-        return *this;
-      }
+      OliveBuilder();
+      void display_settings();
+      OliveDB build();
+      OliveBuilder& storage(const StorageType storage);      
+      OliveBuilder& distance_method(const QueryType distance_method);
+      OliveBuilder& ndim(int ndim);
+      OliveBuilder& preprocessor(Preprocessor preprocessor);
+      OliveBuilder& global_indexer(Indexer* indexer);
+      OliveBuilder& local_indexer(Indexer* indexer);
   };
 
   /**
@@ -141,36 +110,15 @@ namespace olive
   class OliveDB: public StorageEngine, public SearchEngine, public IndexerEngine
   {
     friend class OliveBuilder;
-    
     private:
       OliveDBSettings settings;
-      
-      OliveDB(const OliveDBSettings& settings): settings(settings){
-
-      };
+      OliveDB(const OliveDBSettings& settings);
     public:
-      static OliveBuilder builder(){ return OliveBuilder(); }
-
-      /**
-       * @brief pointer to the storage dynamic class, defining the persistence mechanism
-       */
+      static OliveBuilder builder();
       std::unique_ptr<Storage> storage_type() override;
-      /**
-       * @brief pointer to the query dynamic class, defining the distance calculation method
-       */
       std::unique_ptr<Query> query_type() override;
-      
-      /**
-       * @brief Defines the storage path, if applicable
-      */
       std::string storage_path() override;
-      
-      /**
-       * @brief Retrieves the already loaded data, if applicable. Otherwise, loads the data from the storage
-      */
-      Vec<Vec<float>> loaded_data() override;
-
-      
+      Vec<Vec<float>> loaded_data() override; // calls indexer deducer -> calls load_by_index -> temporarily stores data in memory -> returns data
       ~OliveDB(){
         deactivate();
       }

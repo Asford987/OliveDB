@@ -13,19 +13,13 @@ namespace olive
   class Vec: public std::vector<T>
   {
 
-  friend class MetadataModifier;
+    friend class MetadataModifier;
+    private:
+      Metadata meta;
+    public:
+      using std::vector<T>::vector;
 
-  private:
-    Metadata meta;
-
-  public:
-    using std::vector<T>::vector;
-
-    // metadata for Vec. Temporary solution: using size_t as id. Will be created a new class for metadata
-    Metadata metadata()
-    {
-      return meta;
-      }
+      Metadata metadata();
 
       Vec<T> operator+(const Vec<T> &other) const;
       Vec<T> operator-(const Vec<T> &other) const;
@@ -67,6 +61,7 @@ namespace olive
       Vec<Vec<T>> unsqueeze() const;
       T squeeze(size_t idx) const;
       Vec<T> flatten() const;
+      
   };
 
 } // namespace olive
