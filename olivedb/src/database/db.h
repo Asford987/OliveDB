@@ -1,8 +1,8 @@
 #pragma once
-#include "query/query.h"
-#include "storage/storage.h"
-#include "vector/vec.h"
-#include "preprocess/preprocess.h"
+#include <query/query.h>
+#include <storage/storage.h>
+#include <vector/vec.h>
+#include <preprocess/preprocess.h>
 
 #include <iostream>
 #include <string>

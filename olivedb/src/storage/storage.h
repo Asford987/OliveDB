@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <cstdint>
-#include "vector/vec.h"
+#include <vector/vec.h>
 
 namespace olive
 {

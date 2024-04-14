@@ -5,5 +5,10 @@ project(OliveDB)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")
-file(GLOB_RECURSE HEADERS "src/*.h")
+include_directories(src)
+
+file(GLOB CMAKE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/CMake/*.cmake)
+
+foreach(CMAKE_FILE ${CMAKE_FILES})
+    include(${CMAKE_FILE})
+endforeach()
