@@ -38,7 +38,10 @@ namespace olive
   };
 
   class IndexerEngine{
-
+    public:
+      virtual void set_indexer(int layer, Indexer* indexer) = 0;
+      
+      void set_index(const Vec<Vec<float>> &data);
   };
 
 } // namespace olive

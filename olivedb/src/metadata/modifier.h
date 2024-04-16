@@ -1,4 +1,3 @@
-
 #pragma once
 #include <string>
 #include <vector>
@@ -16,6 +15,12 @@ namespace olive
 {
   class MetadataModifier
   {
+    private:
+      MetadataModifier();
+    public:
+      MetadataModifier& get_instance();
+      void modify_id();
+      void modify_index();
 
   };
 
