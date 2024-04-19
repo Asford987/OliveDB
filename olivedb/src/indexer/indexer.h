@@ -18,8 +18,6 @@ namespace olive
     public:
       virtual Vec<uint64_t> get_indexes(const Vec<float> &query) = 0;
       virtual Vec<uint64_t> get_indexes(const Vec<uint64_t> &shortlist) = 0;
-      Vec<uint64_t> retrieve_candidate_ids(const Vec<Vec<float>> &query);
-      void set_index(const Vec<Vec<float>> &data);
   };
 
   class LSHIndexer : public Indexer

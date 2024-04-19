@@ -41,4 +41,14 @@ namespace olive
     return storage_type()->load_by_index(indexes);
   }
 
+  Vec<uint64_t> IndexerEngine::get_index(Vec<Vec<float>> &data)
+  {
+
+  }
+
+  void IndexerEngine::set_index(const Vec<Vec<float>> &data)
+  {
+
+  }
+
 } // namespace olive

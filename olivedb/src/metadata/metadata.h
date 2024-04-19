@@ -19,6 +19,6 @@ namespace olive
   {
     public:
       uint64_t id=0;
-      std::vector<uint64_t> indexes= {0,0};
+      uint64_t index = 0;
   };
 } // namespace olive

@@ -4,10 +4,11 @@
 #include <memory>
 #include <map>
 #include <functional>
-#include "vector/vec.h"
-#include "engines/storage/storage.h"
-#include "engines/query/query.h"
-#include "engines/indexer/indexer.h"
+#include "preprocess.h"
+#include <vector/vec.h>
+#include <storage/storage.h>
+#include <query/query.h>
+#include <indexer/indexer.h>
 
 
 

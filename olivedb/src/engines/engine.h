@@ -38,7 +38,10 @@ namespace olive
   };
 
   class IndexerEngine{
-
+    public:
+      virtual std::unique_ptr<Indexer> indexer_type() = 0;
+      virtual Vec<uint64_t> get_index(Vec<Vec<float>> &data);
+      virtual void set_index(const Vec<Vec<float>> &data);
   };
 
 } // namespace olive
