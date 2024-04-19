@@ -59,7 +59,7 @@ namespace olive
   /**
    * @brief The vector database class, implementing the StorageEngine, SearchEngine and IndexerEngine interfaces
   */
-  class OliveDB: public StorageEngine, public SearchEngine, public IndexerEngine
+  class OliveDB: public StorageEngine, public SearchEngine //, public IndexerEngine
   {
     friend class OliveBuilder;
     private:
@@ -71,7 +71,7 @@ namespace olive
       std::unique_ptr<Query> query_type() override;
       std::unique_ptr<Indexer> indexer_type() override;
       std::string storage_path() override;
-      Vec<Vec<float>> loaded_data() override; // calls indexer deducer -> calls load_by_index -> temporarily stores data in memory -> returns data
+      Vec<Vec<float>> loaded_data() override;
       ~OliveDB(){
         deactivate();
       }

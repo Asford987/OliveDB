@@ -3,6 +3,7 @@
 
 namespace olive
 {
+
   std::ostream& operator<<(std::ostream& os, const OliveDBSettings& settings)
   {
     // os << "OliveDBSettings(\n\tstorage=" << settings.storage << ",\n\tdistance_method=" 
