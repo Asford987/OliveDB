@@ -366,7 +366,7 @@ namespace olive
   }
 
   template <typename T>
-  Vec<T> Vec<T>::append(const Vec<T> &other) const 
+  Vec<T> Vec<T>::append(Vec<T> &other) 
   {
     Vec<T> result;
     for(auto i : *this)
@@ -381,7 +381,7 @@ namespace olive
   }
 
   template <typename T>
-  Vec<T> Vec<T>::prepend(const Vec<T> &other) const 
+  Vec<T> Vec<T>::prepend(Vec<T> &other) 
   {
     Vec<T> result;
     for(auto i : other)

@@ -56,8 +56,8 @@ namespace olive
       size_t argmax() const;
       Vec<T> slice(int start, int end) const;
       Vec<T> slice(int start) const;
-      Vec<T> append(const Vec<T> &other) const;
-      Vec<T> prepend(const Vec<T> &other) const;
+      Vec<T> append(Vec<T> &other);
+      Vec<T> prepend(Vec<T> &other);
       Vec<Vec<T>> unsqueeze() const;
       T squeeze(size_t idx) const;
       Vec<T> flatten() const;
