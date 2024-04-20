@@ -61,6 +61,11 @@ namespace olive
       Vec<Vec<T>> unsqueeze() const;
       T squeeze(size_t idx) const;
       Vec<T> flatten() const;
+      bool is_empty() const;
+      bool all() const;
+      bool any() const;
+
+      operator bool() const;
       
   };
 

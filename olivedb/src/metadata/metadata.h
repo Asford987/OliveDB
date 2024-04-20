@@ -18,7 +18,7 @@ namespace olive
   class Metadata
   {
     friend class MetadataModifier;
-    private:
+    public:
       uint64_t id=0;
       uint64_t index = 0;
   };

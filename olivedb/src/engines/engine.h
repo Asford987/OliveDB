@@ -17,16 +17,16 @@ namespace olive
   {
     protected:
       virtual std::unique_ptr<Query> query_type() = 0;
-      virtual Vec<Vec<float>> loaded_data() = 0;
+      virtual Vec<Vec<float>> load_data_by_queries(const Vec<Vec<float>> &query) = 0;
+
     public:
-      std::map<uint64_t, float> search(const Vec<float> &query, int num_results);
+      std::map<uint64_t, float> search(const Vec<Vec<float>> &query, int num_results);
   };
 
   class StorageEngine
   {
     protected:
       virtual std::unique_ptr<Storage> storage_type() = 0;
-      virtual std::string storage_path() = 0;
     public:
       bool activate();
       bool deactivate();
@@ -40,7 +40,7 @@ namespace olive
   class IndexerEngine{
     public:
       virtual std::unique_ptr<Indexer> indexer_type() = 0;
-      virtual Vec<uint64_t> get_index(Vec<Vec<float>> &data);
+      virtual Vec<uint64_t> get_indexes(const Vec<Vec<float>> &data);
       virtual void set_index(const Vec<Vec<float>> &data);
   };
 

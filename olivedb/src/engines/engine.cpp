@@ -7,9 +7,9 @@
 
 namespace olive
 {
-  std::map<uint64_t, float> SearchEngine::search(const Vec<float> &query, int num_results)
+  std::map<uint64_t, float> SearchEngine::search(const Vec<Vec<float>> &query, int num_results)
   {
-    Vec<Vec<float>> data = loaded_data();
+    Vec<Vec<float>> data = load_data_by_queries(query);
     std::map<uint64_t, float> results; 
     for(auto &d : data)
     {
@@ -20,7 +20,7 @@ namespace olive
 
   bool StorageEngine::activate()
   {
-    return storage_type()->activate(storage_path());
+    return storage_type()->activate();
   }
   bool StorageEngine::deactivate()
   { 
@@ -41,7 +41,7 @@ namespace olive
     return storage_type()->load_by_index(indexes);
   }
 
-  Vec<uint64_t> IndexerEngine::get_index(Vec<Vec<float>> &data)
+  Vec<uint64_t> IndexerEngine::get_indexes(const Vec<Vec<float>> &data)
   {
 
   }

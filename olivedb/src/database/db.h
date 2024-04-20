@@ -19,13 +19,13 @@ namespace olive
   class OliveDBSettings
   {
     friend class OliveDB;
-    
+    friend class OliveBuilder;
     private:
-      Storage* storage;
-      Query* distance_method;      
+      Storage* storage = nullptr;
+      Query* distance_method = nullptr;      
       int ndim;
       Preprocessor preprocessor;
-      Indexer* indexer;
+      Indexer* indexer = nullptr;
 
     public:
       friend std::ostream& operator<<(std::ostream& os, const OliveDBSettings& settings);
@@ -59,19 +59,24 @@ namespace olive
   /**
    * @brief The vector database class, implementing the StorageEngine, SearchEngine and IndexerEngine interfaces
   */
-  class OliveDB: public StorageEngine, public SearchEngine //, public IndexerEngine
+  class OliveDB: public StorageEngine, public SearchEngine, public IndexerEngine
   {
     friend class OliveBuilder;
     private:
       OliveDBSettings settings;
+      std::unique_ptr<Storage> storage = nullptr;
+      std::unique_ptr<Query> distance_method = nullptr;
+      std::unique_ptr<Indexer> indexer = nullptr;
+      Vec<Vec<float>> last_query;
+      Vec<Vec<float>> last_retrieval;
+
       OliveDB(const OliveDBSettings& settings);
     public:
       static OliveBuilder builder();
       std::unique_ptr<Storage> storage_type() override;
       std::unique_ptr<Query> query_type() override;
       std::unique_ptr<Indexer> indexer_type() override;
-      std::string storage_path() override;
-      Vec<Vec<float>> loaded_data() override;
+      Vec<Vec<float>> load_data_by_queries(const Vec<Vec<float>> &query) override;
       ~OliveDB(){
         deactivate();
       }

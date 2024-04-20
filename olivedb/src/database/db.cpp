@@ -49,6 +49,23 @@ namespace olive
 
   OliveDB OliveBuilder::build()
   {
+    if(settings.storage == nullptr)
+    {
+      throw std::runtime_error("Storage type not set");
+    }
+    if(settings.distance_method == nullptr)
+    {
+      throw std::runtime_error("Distance method algorithm not set");
+    }
+    if(settings.indexer == nullptr)
+    {
+      throw std::runtime_error("Indexer algorithm not set");
+    }
+    if(settings.ndim <= 0)
+    {
+      throw std::runtime_error(std::string("Number of dimensions not set or invalid: it must be a positive integer. Current value: ") + std::to_string(settings.ndim));
+    }
+
     return OliveDB(settings);
   }
 
@@ -87,30 +104,39 @@ namespace olive
 
   std::unique_ptr<Storage> OliveDB::storage_type()
   {
-
+    if(storage == nullptr)
+    {
+      storage = std::make_unique<Storage>(settings.storage);
+    }
+    return std::move(storage);
   }
 
   std::unique_ptr<Query> OliveDB::query_type()
   {
-
+    if(distance_method == nullptr)
+    {
+      distance_method = std::make_unique<Query>(settings.distance_method);
+    }
+    return std::move(distance_method);
   }
 
   std::unique_ptr<Indexer> OliveDB::indexer_type()
   {
-
+    if(indexer == nullptr)
+    {
+      indexer = std::make_unique<Indexer>(settings.indexer);
+    }
+    return std::move(indexer);
   }
 
-  std::string OliveDB::storage_path()
+  Vec<Vec<float>> OliveDB::load_data_by_queries(const Vec<Vec<float>> &query)
   {
-
-  }
-
-  
-
-  Vec<Vec<float>> OliveDB::loaded_data(){
-    // check if data was already loaded
-    // if not, load data with storage engine's methods
-    return Vec<Vec<float>>();
+    if(last_query == query)
+    {
+      return last_retrieval;
+    }
+    auto indexes = get_indexes(query);
+    return storage_type()->load_by_index(indexes);
   }
 
 } // namespace olive

@@ -422,4 +422,42 @@ namespace olive
     return flat;
   }
 
+  template <typename T>
+  bool Vec<T>::is_empty() const
+  {
+    return this->size() == 0;
+  }
+
+  template <typename T>
+  bool Vec<T>::all() const
+  {
+    for (auto &v : *this)
+    {
+      if (!v)
+      {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  template <typename T>
+  bool Vec<T>::any() const
+  {
+    for (auto &v : *this)
+    {
+      if (v)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  template <typename T>
+  Vec<T>::operator bool() const
+  {
+    return this->all();
+  } 
+
 } // namespace olive
