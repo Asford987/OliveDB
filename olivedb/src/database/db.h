@@ -64,22 +64,21 @@ namespace olive
     friend class OliveBuilder;
     private:
       OliveDBSettings settings;
-      std::unique_ptr<Storage> storage = nullptr;
-      std::unique_ptr<Query> distance_method = nullptr;
-      std::unique_ptr<Indexer> indexer = nullptr;
+      Storage* storage = nullptr;
+      Query* distance_method = nullptr;
+      Indexer* indexer = nullptr;
       Vec<Vec<float>> last_query;
       Vec<Vec<float>> last_retrieval;
 
       OliveDB(const OliveDBSettings& settings);
     public:
       static OliveBuilder builder();
-      std::unique_ptr<Storage> storage_type() override;
-      std::unique_ptr<Query> query_type() override;
-      std::unique_ptr<Indexer> indexer_type() override;
+      Storage* storage_type() override;
+      Query* query_type() override;
+      Indexer* indexer_type() override;
       Vec<Vec<float>> load_data_by_queries(const Vec<Vec<float>> &query) override;
-      ~OliveDB(){
-        deactivate();
-      }
+      std::map<std::pair<uint64_t, uint64_t>, float> search(std::vector<std::string> &sentences, int k=0); 
+      ~OliveDB();
   };
 
 } // namespace olive

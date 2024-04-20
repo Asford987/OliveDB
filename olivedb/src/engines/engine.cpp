@@ -18,7 +18,23 @@ namespace olive
         results[pair] = query_type()->similarity(d, q);
       }
     }
-    return results;
+    if(num_results==0) return results;
+    else {
+      std::map<std::pair<uint64_t, uint64_t>, float> top_results;
+      for(int i=0; i<num_results; i++){
+        float max = 0;
+        std::pair<uint64_t, uint64_t> max_pair;
+        for(auto &r : results){
+          if(r.second > max){
+            max = r.second;
+            max_pair = r.first;
+          }
+        }
+        top_results[max_pair] = max;
+        results.erase(max_pair);
+      }
+      return top_results;
+    }
   }
 
   bool StorageEngine::activate()
@@ -31,17 +47,17 @@ namespace olive
     return storage_type()->deactivate(); 
   }
 
-  void StorageEngine::persist(const Vec<Vec<float>> &data)
+  void StorageEngine::persist(Vec<Vec<float>> &data)
   {
     storage_type()->persist(data);
   }
 
-  Vec<Vec<float>> StorageEngine::load_by_id(const Vec<uint64_t> &ids)
+  Vec<Vec<float>> StorageEngine::load_by_id(Vec<uint64_t> &ids)
   {
     return storage_type()->load_by_id(ids);
   }
 
-  Vec<Vec<float>> StorageEngine::load_by_index(const Vec<uint64_t> &indexes){
+  Vec<Vec<float>> StorageEngine::load_by_index(Vec<uint64_t> &indexes){
     return storage_type()->load_by_index(indexes);
   }
 

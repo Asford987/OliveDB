@@ -102,29 +102,29 @@ namespace olive
     return OliveBuilder();
   }
 
-  std::unique_ptr<Storage> OliveDB::storage_type()
+  Storage* OliveDB::storage_type()
   {
     if(storage == nullptr)
     {
-      storage = std::make_unique<Storage>(settings.storage);
+      storage = settings.storage;
     }
     return std::move(storage);
   }
 
-  std::unique_ptr<Query> OliveDB::query_type()
+  Query* OliveDB::query_type()
   {
     if(distance_method == nullptr)
     {
-      distance_method = std::make_unique<Query>(settings.distance_method);
+      distance_method = settings.distance_method;
     }
     return std::move(distance_method);
   }
 
-  std::unique_ptr<Indexer> OliveDB::indexer_type()
+  Indexer* OliveDB::indexer_type()
   {
     if(indexer == nullptr)
     {
-      indexer = std::make_unique<Indexer>(settings.indexer);
+      indexer = settings.indexer;
     }
     return std::move(indexer);
   }
@@ -137,6 +137,20 @@ namespace olive
     }
     auto indexes = get_indexes(query);
     return storage_type()->load_by_index(indexes);
+  }
+
+  std::map<std::pair<uint64_t, uint64_t>, float> OliveDB::search(std::vector<std::string> &sentences, int k)
+  {
+    auto query_vectorized = settings.preprocessor.apply(sentences);
+    return SearchEngine::search(query_vectorized, k);
+  }
+
+  OliveDB::~OliveDB()
+  {
+    deactivate();
+    delete storage;
+    delete distance_method;
+    delete indexer;
   }
 
 } // namespace olive

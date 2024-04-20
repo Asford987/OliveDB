@@ -17,7 +17,7 @@ namespace olive
 
   
 
-  Vec<Vec<float>> Preprocessor::apply(std::vector<std::string> &sentence) { return preprocess_function(sentence); }
+  Vec<Vec<float>> Preprocessor::apply(std::vector<std::string> &sentences) { return preprocess_function(sentences); }
 
   Preprocessor &Preprocessor::operator = (const Preprocessor &preprocessor)
   {
