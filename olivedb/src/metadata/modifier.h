@@ -19,8 +19,8 @@ namespace olive
       MetadataModifier();
     public:
       MetadataModifier& get_instance();
-      void modify_id();
-      void modify_index();
+      void modify_id(Metadata &metadata, uint64_t id);
+      void modify_index(Metadata &metadata, uint64_t index);
 
   };
 

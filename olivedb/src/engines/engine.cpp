@@ -7,13 +7,16 @@
 
 namespace olive
 {
-  std::map<uint64_t, float> SearchEngine::search(const Vec<Vec<float>> &query, int num_results)
+  std::map<std::pair<uint64_t, uint64_t>, float> SearchEngine::search(Vec<Vec<float>> &query, int num_results)
   {
     Vec<Vec<float>> data = load_data_by_queries(query);
-    std::map<uint64_t, float> results; 
+    std::map<std::pair<uint64_t, uint64_t>, float> results; 
     for(auto &d : data)
     {
-      results[d.metadata().id] = query_type()->similarity(query, d);
+      for(auto &q : query){
+        auto pair = std::make_pair(d.metadata().id, q.metadata().id);
+        results[pair] = query_type()->similarity(d, q);
+      }
     }
     return results;
   }
@@ -22,6 +25,7 @@ namespace olive
   {
     return storage_type()->activate();
   }
+  
   bool StorageEngine::deactivate()
   { 
     return storage_type()->deactivate(); 
@@ -43,7 +47,7 @@ namespace olive
 
   Vec<uint64_t> IndexerEngine::get_indexes(const Vec<Vec<float>> &data)
   {
-
+    return indexer_type()->get_indexes(data);
   }
 
   void IndexerEngine::set_index(const Vec<Vec<float>> &data)

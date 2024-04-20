@@ -19,12 +19,15 @@ namespace olive
     return instance;
   }
 
-  void MetadataModifier::modify_id()
+  void MetadataModifier::modify_id(Metadata &metadata, uint64_t id)
   {
+    metadata.id = id;
   }
 
-  void MetadataModifier::modify_index()
+  void MetadataModifier::modify_index(Metadata &metadata, uint64_t index)
   {
+    metadata.index = index;
+    metadata.valid_index = true;
   }
 
 } // namespace olive

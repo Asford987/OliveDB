@@ -20,7 +20,7 @@ namespace olive
       virtual Vec<Vec<float>> load_data_by_queries(const Vec<Vec<float>> &query) = 0;
 
     public:
-      std::map<uint64_t, float> search(const Vec<Vec<float>> &query, int num_results);
+      std::map<std::pair<uint64_t, uint64_t>, float> search(Vec<Vec<float>> &query, int num_results);
   };
 
   class StorageEngine
@@ -32,7 +32,6 @@ namespace olive
       bool deactivate();
       void persist(const Vec<Vec<float>> &data);
       Vec<Vec<float>> load_by_id(const Vec<uint64_t> &ids);
-
       Vec<Vec<float>> load_by_index(const Vec<uint64_t> &indexes);
 
   };

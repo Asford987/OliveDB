@@ -15,14 +15,8 @@ namespace olive
 
   class Indexer
   {
-    private:
-      virtual Vec<uint64_t> preprocess() = 0;
-      virtual Vec<uint64_t> postprocess() = 0;
-      virtual Vec<uint64_t> postprocess() = 0;
-
     public:
-      virtual Vec<uint64_t> get_indexes(const Vec<float> &query) = 0;
-      virtual Vec<uint64_t> get_indexes(const Vec<uint64_t> &shortlist) = 0;
+      virtual Vec<uint64_t> get_indexes(const Vec<Vec<float>> &query) = 0;
   };
 
   class LSHIndexer : public Indexer
