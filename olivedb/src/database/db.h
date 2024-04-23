@@ -1,8 +1,8 @@
 #pragma once
-#include <query/query.h>
-#include <storage/storage.h>
-#include <vector/vec.h>
-#include <preprocess/preprocess.h>
+#include "engines/engine.h"
+#include "query/query.h"
+#include "storage/storage.h"
+#include "preprocess/preprocess.h"
 
 #include <iostream>
 #include <string>
@@ -37,6 +37,8 @@ namespace olive
 
 
   };
+
+  class OliveDB;
 
   /**
    * @brief Builder class for the OliveDB class

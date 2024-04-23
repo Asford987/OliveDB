@@ -5,10 +5,10 @@
 #include <memory>
 #include <map>
 #include <functional>
-#include <vector/vec.h>
-#include <storage/storage.h>
-#include <query/query.h>
-#include <indexer/indexer.h>
+#include "query/query.h"
+#include "indexer/indexer.h"
+#include "storage/storage.h"
+#include "vector/vec.h"
 
 namespace olive
 {

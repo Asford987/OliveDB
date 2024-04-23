@@ -5,7 +5,7 @@ project(OliveDB)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-include_directories(src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 file(GLOB SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*/*.cpp)
 file(GLOB HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*/*.h)

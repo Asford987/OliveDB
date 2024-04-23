@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
+#include <algorithm>
+#include <cmath>
 #include <type_traits>
 #include <cstdint>
-#include <indexer/indexer.h>
-#include <metadata/modifier.h>
-#include <metadata/metadata.h>
+#include "metadata/metadata.h"
 
 namespace olive
 {
