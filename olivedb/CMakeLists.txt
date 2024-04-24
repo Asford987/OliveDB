@@ -22,3 +22,21 @@ file(GLOB CMAKE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/CMake/*.cmake)
 foreach(CMAKE_FILE ${CMAKE_FILES})
     include(${CMAKE_FILE})
 endforeach()
+
+# Create a target to run tests
+enable_testing()
+
+# Find all test files with the extension ".cpp" in the tests directory
+file(GLOB test_files RELATIVE PATH ${PROJECT_SOURCE_DIR}/tests "*.cpp")
+
+# Loop through each test file and create a test target
+foreach(test_file ${test_files})
+  get_filename_component(test_name ${test_file} NAME_WE)
+  add_executable(${test_name} ${PROJECT_SOURCE_DIR}/tests/${test_file})
+  target_link_libraries(${test_name} PRIVATE olivedb)
+  add_test(NAME ${test_name} COMMAND ${test_name})
+endforeach(test_file)
+
+# (Optional) Add a target to run all tests
+add_test(NAME all_tests COMMAND make test)
+
