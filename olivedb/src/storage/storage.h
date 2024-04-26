@@ -7,6 +7,13 @@
 
 namespace olive
 {
+
+  class StorageMetadata{
+    public:
+      uint64_t ndim;
+
+  };
+
   class Storage
   {
   public:
@@ -35,10 +42,15 @@ namespace olive
   private:
     std::string file_path;
     std::fstream file;
+    StorageMetadata metadata;
+    bool is_active;
+    Vec<Vec<float>> cache;
+    Vec<uint64_t> cache_indexes;
 
   public:
     std::string get_file_path();
     void set_file_path(std::string file_path);
+    StorageMetadata get_metadata();
 
     void persist(Vec<Vec<float>> &data) override;
     Vec<Vec<float>> load_by_id(Vec<uint64_t> &ids) override;
@@ -51,8 +63,17 @@ namespace olive
   {
   private:
     std::string file_path;
+    bool is_active;
+    std::string file_path;
+    Vec<Vec<float>> cache;
+    Vec<uint64_t> cache_indexes;
+    // connector
 
   public:
+    void make_query(std::string &query);
+    std::string get_file_path();
+    void set_file_path(std::string file_path);
+
     void persist(Vec<Vec<float>> &data) override;
     Vec<Vec<float>> load_by_id(Vec<uint64_t> &ids) override;
     Vec<Vec<float>> load_by_index(Vec<uint64_t> &indexes) override;

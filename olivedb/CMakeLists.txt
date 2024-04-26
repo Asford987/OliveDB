@@ -24,6 +24,7 @@ foreach(CMAKE_FILE ${CMAKE_FILES})
 endforeach()
 
 find_package(Catch2 REQUIRED HINTS "${PROJECT_SOURCE_DIR}/libs/Catch2")
+include_directories(${PROJECT_SOURCE_DIR}/libs/Catch2/single_include)
 
 enable_testing()
 
