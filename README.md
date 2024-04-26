@@ -1,4 +1,13 @@
 # OliveDB
 
-Algorithm agnostic Vector Database created for learning purposes 
+Algorithm agnostic Vector Database created for learning purposes
 
+## ABOUT
+
+## HOW TO USE
+
+## INSTALLATION
+
+## DOCS
+
+## LICENSE

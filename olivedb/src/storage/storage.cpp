@@ -46,41 +46,50 @@ namespace olive
 
   void DiskStorage::persist(Vec<Vec<float>> &data)
   {
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
   Vec<Vec<float>> DiskStorage::load_by_id(Vec<uint64_t> &ids)
   {
-    // return Vec<Vec<float>();
-  }
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
 
   Vec<Vec<float>> DiskStorage::load_by_index(Vec<uint64_t> &indexes)
   {
-    // return Vec<Vec<float>();
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
-  bool DiskStorage::activate() { 
-    
+  bool DiskStorage::activate() {
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     return true;
   }
 
-  bool DiskStorage::deactivate() { return false; }
+  bool DiskStorage::deactivate() {
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    return false; 
+  }
 
   void MongoStorage::persist(Vec<Vec<float>> &data)
   {
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
   Vec<Vec<float>> MongoStorage::load_by_id(Vec<uint64_t> &ids)
   {
-    // return Vec<Vec<float>();
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
   Vec<Vec<float>> MongoStorage::load_by_index(Vec<uint64_t> &indexes)
   {
-    // return Vec<Vec<float>();
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
-  bool MongoStorage::activate() { return true; }
+  bool MongoStorage::activate() {
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  }
 
-  bool MongoStorage::deactivate() { return false; }
+  bool MongoStorage::deactivate() {
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  }
 
 } // namespace olive

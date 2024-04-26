@@ -1,6 +1,6 @@
-#include <database/db.h>
-#include <catch2/catch_assertion_result.hpp>
+#include <catch2/catch_test_macros.hpp>
 
-int main(){
-    return 0;
+TEST_CASE("Basic test", "[basic]")
+{
+    REQUIRE(true == true); // Example assertion
 }

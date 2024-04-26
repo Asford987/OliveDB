@@ -23,20 +23,12 @@ foreach(CMAKE_FILE ${CMAKE_FILES})
     include(${CMAKE_FILE})
 endforeach()
 
-# Create a target to run tests
+find_package(Catch2 REQUIRED HINTS "${PROJECT_SOURCE_DIR}/libs/Catch2")
+
 enable_testing()
 
-# Find all test files with the extension ".cpp" in the tests directory
-file(GLOB test_files RELATIVE PATH ${PROJECT_SOURCE_DIR}/tests "*.cpp")
+add_executable(teste ${PROJECT_SOURCE_DIR}/tests/tests.cpp)
+target_link_libraries(teste PRIVATE olivedb Catch2::Catch2)
+add_test(NAME teste COMMAND teste)
 
-# Loop through each test file and create a test target
-foreach(test_file ${test_files})
-  get_filename_component(test_name ${test_file} NAME_WE)
-  add_executable(${test_name} ${PROJECT_SOURCE_DIR}/tests/${test_file})
-  target_link_libraries(${test_name} PRIVATE olivedb)
-  add_test(NAME ${test_name} COMMAND ${test_name})
-endforeach(test_file)
-
-# (Optional) Add a target to run all tests
-add_test(NAME all_tests COMMAND make test)
 
