@@ -4,7 +4,7 @@ namespace olive
 {
 
   template <typename T>
-  Metadata Vec<T>::metadata()
+  Metadata& Vec<T>::metadata()
   {
     return meta; 
   }

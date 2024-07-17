@@ -1,3 +1,6 @@
 .vscode
 */target
 exp
+**pycache*
+olivedb/python/build
+olivedb/python/*.so

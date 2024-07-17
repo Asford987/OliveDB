@@ -3,6 +3,7 @@
 #include "query/query.h"
 #include "storage/storage.h"
 #include "preprocess/preprocess.h"
+#include "metadata.h"
 
 #include <iostream>
 #include <string>
@@ -34,8 +35,6 @@ namespace olive
       void set_ndim(int ndim);
       void set_preprocessor(Preprocessor preprocessor);
       void set_indexer(Indexer* indexer); 
-
-
   };
 
   class OliveDB;

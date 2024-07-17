@@ -19,7 +19,7 @@ namespace olive
     public:
       using std::vector<T>::vector;
 
-      Metadata metadata();
+      Metadata& metadata();
 
       Vec<T> operator+(const Vec<T> &other) const;
       Vec<T> operator-(const Vec<T> &other) const;

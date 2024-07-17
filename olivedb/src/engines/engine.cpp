@@ -66,9 +66,13 @@ namespace olive
     return indexer_type()->get_indexes(data);
   }
 
-  void IndexerEngine::set_index(const Vec<Vec<float>> &data)
+  void IndexerEngine::set_index(Vec<Vec<float>> &data)
   {
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    Vec<uint64_t> indexes = get_indexes(data);
+    for(size_t i = 0; i < data.size(); i++)
+    {
+      data[i].metadata().index = indexes[i];
+    }
   }
 
 } // namespace olive

@@ -40,7 +40,7 @@ namespace olive
     public:
       virtual Indexer* indexer_type() = 0;
       virtual Vec<uint64_t> get_indexes(const Vec<Vec<float>> &data);
-      virtual void set_index(const Vec<Vec<float>> &data);
+      virtual void set_index(Vec<Vec<float>> &data);
   };
 
 } // namespace olive
