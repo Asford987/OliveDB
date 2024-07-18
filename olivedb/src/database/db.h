@@ -79,7 +79,6 @@ namespace olive
       Indexer* indexer_type() override;
       Vec<Vec<float>> load_data_by_queries(const Vec<Vec<float>> &query) override;
       std::map<std::pair<uint64_t, uint64_t>, float> search(std::vector<std::string> &sentences, int k=0); 
-      ~OliveDB();
   };
 
 } // namespace olive

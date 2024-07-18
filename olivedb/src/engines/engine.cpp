@@ -37,6 +37,11 @@ namespace olive
     }
   }
 
+  SearchEngine::~SearchEngine()
+  {
+    delete query_type();
+  }
+
   bool StorageEngine::activate()
   {
     return storage_type()->activate();
@@ -61,6 +66,12 @@ namespace olive
     return storage_type()->load_by_index(indexes);
   }
 
+  StorageEngine::~StorageEngine()
+  {
+    deactivate();
+    delete storage_type();
+  }
+
   Vec<uint64_t> IndexerEngine::get_indexes(const Vec<Vec<float>> &data)
   {
     return indexer_type()->get_indexes(data);
@@ -73,6 +84,11 @@ namespace olive
     {
       data[i].metadata().index = indexes[i];
     }
+  }
+
+  IndexerEngine::~IndexerEngine()
+  {
+    delete indexer_type();
   }
 
 } // namespace olive

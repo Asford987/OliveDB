@@ -145,12 +145,5 @@ namespace olive
     return SearchEngine::search(query_vectorized, k);
   }
 
-  OliveDB::~OliveDB()
-  {
-    deactivate();
-    delete storage;
-    delete distance_method;
-    delete indexer;
-  }
 
 } // namespace olive

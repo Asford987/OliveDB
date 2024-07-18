@@ -21,6 +21,7 @@ namespace olive
 
     public:
       std::map<std::pair<uint64_t, uint64_t>, float> search(Vec<Vec<float>> &query, int num_results = 0);
+      ~SearchEngine();
   };
 
   class StorageEngine
@@ -33,7 +34,7 @@ namespace olive
       void persist(Vec<Vec<float>> &data);
       Vec<Vec<float>> load_by_id(Vec<uint64_t> &ids);
       Vec<Vec<float>> load_by_index(Vec<uint64_t> &indexes);
-
+      ~StorageEngine();
   };
 
   class IndexerEngine{
@@ -41,6 +42,7 @@ namespace olive
       virtual Indexer* indexer_type() = 0;
       virtual Vec<uint64_t> get_indexes(const Vec<Vec<float>> &data);
       virtual void set_index(Vec<Vec<float>> &data);
+      ~IndexerEngine();
   };
 
 } // namespace olive
