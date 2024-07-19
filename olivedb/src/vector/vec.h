@@ -4,7 +4,7 @@
 #include <cmath>
 #include <type_traits>
 #include <cstdint>
-#include "metadata/metadata.h"
+#include "metadata.h"
 
 namespace olive
 {
